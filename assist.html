@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Assistant Terms - Master Science Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-sky-400 via-blue-700 to-[#0a1a33] p-4 flex flex-col items-center">
+<!-- Top Full-Width Banner -->
+<div class="w-full h-[300px] bg-white/20 backdrop-blur-md shadow-lg flex items-center justify-center rounded-none mb-6">
+  <img src="cool.jpg" alt="BlackLogic + OpenAI" class="h-[180px] object-contain animate-breathe"/>
+</div>
+
+<!-- Breathing Animation for Logo -->
+<style>
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+</style>
+
+  <!-- Terms & Conditions Card -->
+  <div class="bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl max-w-3xl w-full p-8">
+    <h1 class="text-2xl font-bold mb-6 text-white">AI Assistant Terms & Conditions</h1>
+
+    <p class="mb-6 text-white/90">Please read and agree to all the terms before using the AI Assistant for educational purposes. You must tick all checkboxes to proceed.</p>
+
+    <form id="termsForm" class="space-y-4">
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term1"/>
+        <label for="term1" class="text-white text-sm">I will use the AI only for educational purposes.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term2"/>
+        <label for="term2" class="text-white text-sm">I will not use AI to copy or cheat on assignments.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term3"/>
+        <label for="term3" class="text-white text-sm">I will respect intellectual property and citations.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term4"/>
+        <label for="term4" class="text-white text-sm">I will not misuse AI for illegal or harmful purposes.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term5"/>
+        <label for="term5" class="text-white text-sm">I understand AI may provide incorrect information and will verify facts.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term6"/>
+        <label for="term6" class="text-white text-sm">I will maintain respectful language when interacting with AI.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term7"/>
+        <label for="term7" class="text-white text-sm">I will not attempt to reverse engineer AI or extract unauthorized data.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term8"/>
+        <label for="term8" class="text-white text-sm">I understand BlackLogic Technologies and OpenAI are not responsible for misuse.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term9"/>
+        <label for="term9" class="text-white text-sm">I will not share my account with anyone else.</label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" class="w-5 h-5 accent-blue-600 mt-1" id="term10"/>
+        <label for="term10" class="text-white text-sm">I agree to follow all rules and guidelines provided by BlackLogic Technologies and OpenAI.</label>
+      </div>
+
+      <button type="button" id="enterBtn" class="w-full bg-white text-gray-800 font-semibold py-3 rounded-xl shadow-lg mt-6 disabled:opacity-50" disabled>
+        Enter AI Assistant
+      </button>
+    </form>
+
+  </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('#termsForm input[type="checkbox"]');
+    const enterBtn = document.getElementById('enterBtn');
+
+    checkboxes.forEach(cb => cb.addEventListener('change', () => {
+      enterBtn.disabled = ![...checkboxes].every(c => c.checked);
+    }));
+
+    enterBtn.addEventListener('click', () => {
+      enterBtn.textContent = "Loading...";
+      setTimeout(() => {
+        window.location.href = "https://chat.openai.com/";
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>

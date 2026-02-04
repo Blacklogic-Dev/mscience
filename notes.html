@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Master Science Hub - Textbooks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* Grade tabs active highlight */
+    .active-tab {
+      @apply bg-blue-600 text-white;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-sky-400 via-blue-700 to-[#0a1a33]">
+
+  <!-- Top Banner -->
+  <div class="w-full h-[300px] bg-white/20 backdrop-blur-md flex items-center justify-center mb-6 shadow-lg rounded-b-3xl">
+    <!-- Logos merged -->
+    <img src="chem.png" alt="Master Science Hub Banner" class="h-[80%] object-contain"/>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Grade Tabs -->
+    <div class="flex gap-3 justify-center mb-6">
+      <button class="px-4 py-2 rounded-xl bg-blue-600 text-white font-semibold" onclick="showGrade(9)">Grade 9</button>
+      <button class="px-4 py-2 rounded-xl bg-white text-gray-800 font-semibold" onclick="showGrade(10)">Grade 10</button>
+      <button class="px-4 py-2 rounded-xl bg-white text-gray-800 font-semibold" onclick="showGrade(11)">Grade 11</button>
+      <button class="px-4 py-2 rounded-xl bg-white text-gray-800 font-semibold" onclick="showGrade(12)">Grade 12</button>
+    </div>
+
+    <!-- Subjects Container -->
+    <div id="subjectsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Sample Subject Card -->
+      <!-- Will be dynamically updated per grade -->
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    const subjectsData = {
+      9: [
+        {name: "Mathematics", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-9-Maths-2-in-1-Extracts.pdf?srsltid=AfmBOophgKjQREWnYhbFgPqOinf_3n91xTlhcShPh72ur7iQOxnHmJki"},
+        {name: "Natural Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-9-Natural-Sciences-3-in-1-Extracts.pdf?srsltid=AfmBOoq92i-fspq5fw-iKqNNqr3qcmB4J974lSB3njK_2R9WI9WyjauC"},
+        {name: "Technology", pdf: "https://www.cambridge.org/et/files/5015/8228/1695/Study___Master_Technology_Grade_9_Teacher_s_Guide.pdf"}
+      ],
+      10: [
+        {name: "Mathematics", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-10-Maths-3-in-1-Extracts.pdf?srsltid=AfmBOop8uENLZwrfy9kHuQ8KDzDn246fjPgd_kYgT3Z2VPd124wPoZgw"},
+        {name: "Physical Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-10-Physical-Sciences-3-in-1-Extracts.pdf?srsltid=AfmBOoqOiJ26Y8Y0CZRkxHgtE70TxGDzRV-cbZnPfsUhu-k3vFCnHh7a"},
+        {name: "Life Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-10-Life-Sciences-CAPS-3-in-1-Extracts.pdf?srsltid=AfmBOoo3iPHSTK_eYVGf4bxm6NIIN42eJ13vfrY0v53RqjDEI1ZziUoJ"}
+      ],
+      11: [
+        {name: "Mathematics", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-11-Maths-3-in-1-Extracts.pdf?srsltid=AfmBOoqJcTyukt9GkAkp_MaZbKazLF979A-POXe8t1KDz5muj-7FYw-T"},
+        {name: "Physical Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-11-Physical-Sciences-3-in-1-Extracts.pdf?srsltid=AfmBOopYpPiOk09ug5SZSGGPRFgBeW2M5xp9GocdrlY1qinveqxzSUAn"},
+        {name: "Life Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2023/07/Gr-11-Life-Sciences-CAPS-3-in-1-Extracts.pdf?srsltid=AfmBOooIwrDnDOLAEEiORYe5pgOiimAYs06A4zFNSq9H4m82bEuoPeeF"}
+      ],
+      12: [
+        {name: "Mathematics", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-12-Maths-2-in-1-Extracts.pdf?srsltid=AfmBOoo9AHXQwEfcC2j3E7i_Ivgt_0qcz_PXCRTrcdW0TNzwt4AWMKaU"},
+        {name: "Physical Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-12-Physical-Sciences-3-in-1-Extracts.pdf?srsltid=AfmBOoqvKs3f8c3aXMkNt4QTtjwMb4y5-06qH0-beOTvdJxAxWY8gvby"},
+        {name: "Life Sciences", pdf: "https://www.theanswer.co.za/wp-content/uploads/2021/11/Gr-12-Life-Sciences-Part-1-CAPS-3-in-1-Extracts.pdf?srsltid=AfmBOop076hxBPrpE25BMepmBr_liZ8_tpFcywcPA0RRDJnBqo3Og0Xe"}
+      ]
+    };
+
+    const subjectsContainer = document.getElementById("subjectsContainer");
+
+    function showGrade(grade) {
+      // Update buttons active state
+      document.querySelectorAll('.flex > button').forEach(btn => btn.classList.remove('bg-blue-600','text-white'));
+      document.querySelectorAll('.flex > button')[grade-9].classList.add('bg-blue-600','text-white');
+
+      // Clear container
+      subjectsContainer.innerHTML = '';
+
+      subjectsData[grade].forEach(sub => {
+        const card = document.createElement('div');
+        card.className = "bg-white/20 backdrop-blur-md p-6 rounded-3xl shadow-lg flex flex-col items-center text-center transition hover:scale-105";
+        card.innerHTML = `
+          <i class="fas fa-book-open fa-3x mb-4 text-yellow-400"></i>
+          <h3 class="text-xl font-bold mb-2 text-white">${sub.name}</h3>
+          <p class="text-sm text-white/80 mb-4">Open the textbook for ${sub.name}</p>
+          <a href="${sub.pdf}" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition">Open PDF</a>
+        `;
+        subjectsContainer.appendChild(card);
+      });
+    }
+
+    // Default to Grade 9
+    showGrade(9);
+  </script>
+
+</body>
+</html>

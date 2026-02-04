@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Master Science Hub Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* Typewriter Effect */
+    .typewriter h1 {
+      overflow: hidden;
+      border-right: .15em solid orange;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .05em;
+      animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: orange; }
+    }
+
+    /* Hover glow effect for cards */
+    .hover-glow:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
+    }
+
+    .transition-glow {
+      transition: all 0.3s ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-sky-400 via-blue-700 to-[#0a1a33] min-h-screen flex flex-col">
+
+  <!-- Top Navbar -->
+  <nav class="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md shadow-md z-20 relative">
+    <h1 class="text-white font-bold text-xl">Master Science Hub</h1>
+    <button id="hamburger" class="text-white text-2xl md:hidden">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+ <!-- Sidebar Drawer -->
+<aside id="drawer" class="fixed top-0 left-0 w-64 h-full bg-white/10 backdrop-blur-md transform -translate-x-full transition-transform z-50 p-6 space-y-6 shadow-xl">
+  <button id="closeDrawer" class="absolute top-4 right-4 text-white text-2xl">
+    <i class="fas fa-times"></i>
+  </button>
+  <ul class="space-y-6 text-white">
+    <li class="flex items-center gap-3 text-lg cursor-pointer hover:text-blue-400">
+      <a href="video.html" class="flex items-center gap-3 w-full">
+        <i class="fas fa-video"></i> Video Lessons
+      </a>
+    </li>
+    <li class="flex items-center gap-3 text-lg cursor-pointer hover:text-blue-400">
+      <a href="notes.html" class="flex items-center gap-3 w-full">
+        <i class="fas fa-book"></i> Textbooks
+      </a>
+    </li>
+    <li class="flex items-center gap-3 text-lg cursor-pointer hover:text-blue-400">
+      <a href="question.html" class="flex items-center gap-3 w-full">
+        <i class="fas fa-file-alt"></i> Question Papers
+      </a>
+    </li>
+    <li class="flex items-center gap-3 text-lg cursor-pointer hover:text-blue-400">
+      <a href="live.html" class="flex items-center gap-3 w-full">
+        <i class="fas fa-broadcast-tower"></i> Live Sessions
+      </a>
+    </li>
+    <li class="flex items-center gap-3 text-lg cursor-pointer hover:text-blue-400">
+      <a href="assist.html" class="flex items-center gap-3 w-full">
+        <i class="fas fa-robot"></i> AI Assistant
+      </a>
+    </li>
+  </ul>
+</aside>
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 relative">
+
+    <!-- Top Banner with Welcome Typewriter Overlay -->
+    <div class="h-[300px] bg-white/10 backdrop-blur-md rounded-3xl mb-8 flex items-center justify-center shadow-xl relative overflow-hidden">
+      <img src="edu.jpg" alt="Welcome Banner" class="absolute inset-0 w-full h-full object-cover rounded-3xl opacity-40">
+      <div class="typewriter z-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-white">Welcome!</h1>
+      </div>
+    </div>
+
+    <!-- Grids -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+      <!-- Video Lessons -->
+      <div class="bg-white/20 backdrop-blur-md rounded-2xl p-5 shadow-lg hover-glow transition-glow cursor-pointer text-center">
+        <i class="fas fa-video text-5xl mb-3 text-white"></i>
+        <h2 class="font-bold text-white text-lg mb-1">Video Lessons</h2>
+        <p class="text-white/80 text-sm">
+          Access curated YouTube video lessons directly within the platform. Learn at your own pace.
+        </p>
+      </div>
+
+      <!-- Notes -->
+      <div class="bg-white/20 backdrop-blur-md rounded-2xl p-5 shadow-lg hover-glow transition-glow cursor-pointer text-center">
+        <i class="fas fa-book text-5xl mb-3 text-white"></i>
+        <h2 class="font-bold text-white text-lg mb-1">Notes</h2>
+        <p class="text-white/80 text-sm">
+          Embedded PDF notes and textbooks for Mathematics, Science, and Technology.
+        </p>
+      </div>
+
+      <!-- Question Papers -->
+      <div class="bg-white/20 backdrop-blur-md rounded-2xl p-5 shadow-lg hover-glow transition-glow cursor-pointer text-center">
+        <i class="fas fa-file-alt text-5xl mb-3 text-white"></i>
+        <h2 class="font-bold text-white text-lg mb-1">Question Papers</h2>
+        <p class="text-white/80 text-sm">
+          Previous question papers embedded for practice and exam prep.
+        </p>
+      </div>
+
+      <!-- Quizzes -->
+      <div class="bg-white/20 backdrop-blur-md rounded-2xl p-5 shadow-lg hover-glow transition-glow cursor-pointer text-center">
+        <i class="fas fa-question-circle text-5xl mb-3 text-white"></i>
+        <h2 class="font-bold text-white text-lg mb-1">Quizzes</h2>
+        <p class="text-white/80 text-sm">
+          Interactive quizzes to test knowledge and track progress.
+        </p>
+      </div>
+
+      <!-- AI Assistant -->
+      <div class="bg-white/20 backdrop-blur-md rounded-2xl p-5 shadow-lg hover-glow transition-glow cursor-pointer text-center">
+        <i class="fas fa-robot text-5xl mb-3 text-white"></i>
+        <h2 class="font-bold text-white text-lg mb-1">AI Assistant</h2>
+        <p class="text-white/80 text-sm">
+          Chat with your AI assistant for instant guidance, explanations, and homework help.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- JS for Drawer -->
+  <script>
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    document.getElementById('hamburger').addEventListener('click', () => {
+      drawer.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    });
+    document.getElementById('closeDrawer').addEventListener('click', () => {
+      drawer.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+    overlay.addEventListener('click', () => {
+      drawer.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>

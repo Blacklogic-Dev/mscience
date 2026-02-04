@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Master Science Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  /* Breathing animation for logo */
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+  /* Bulb glow animation */
+  @keyframes bulbGlow {
+    0%, 100% { color: #6b7280; } /* Grey */
+    50% { color: #facc15; } /* Yellow */
+  }
+  .animate-bulb { animation: bulbGlow 2.5s ease-in-out infinite; }
+</style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-400 via-blue-700 to-[#0a1a33]">
+
+<div class="w-full max-w-md px-6 text-center">
+
+  <!-- Logo -->
+  <div class="flex justify-center mb-6">
+    <img src="science.png" alt="Master Science Hub Logo"
+      class="w-[350px] h-[350px] object-contain rounded-3xl shadow-2xl bg-white/10 backdrop-blur-md p-4"
+      style="animation: breathe 4s ease-in-out infinite;"
+    />
+  </div>
+
+  <!-- Info Grid -->
+  <div class="bg-sky-400/90 rounded-2xl p-8 text-[#0a1a33] shadow-xl mb-6 relative overflow-hidden flex flex-col items-center">
+    <p class="font-semibold text-sm mt-6 text-center">
+      Welcome to <span class="font-bold">Master Science Hub</span> 🚀 where you
+      <span class="font-bold">discover 🔍, learn 📘, and innovate 💡</span>.
+    </p>
+    <p class="text-sm text-center mt-1">
+      Grade <strong>9, 10, 11, and 12</strong> 🎓 in
+      <strong>Mathematics ➗, Science 🧪, and Technology 💻</strong>.
+    </p>
+  </div>
+
+  <!-- Google Button -->
+  <button id="googleBtn" onclick="googleLogin()"
+    class="w-full flex items-center justify-center gap-3 bg-white text-gray-800 font-semibold py-3 rounded-xl shadow-lg transition active:scale-95">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5" />
+    <span id="btnText">Continue with Google</span>
+    <!-- Spinner -->
+    <svg id="spinner" class="hidden w-5 h-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>
+  </button>
+
+  <!-- Hidden Login Form -->
+  <div id="loginForm" class="hidden mt-6 bg-white p-6 rounded-xl shadow-lg text-gray-900 space-y-4">
+    <h2 class="text-xl font-semibold">Student Login</h2>
+    <input type="text" id="studentID" placeholder="Student ID" class="w-full p-2 border rounded" maxlength="6">
+    <input type="password" id="password" placeholder="Password (Year of Birth)" class="w-full p-2 border rounded">
+    <button id="loginBtn" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Login</button>
+    <p id="loginError" class="text-red-600 text-sm hidden font-bold"></p>
+  </div>
+
+</div>
+
+<script>
+  function googleLogin() {
+    const btnText = document.getElementById("btnText");
+    const spinner = document.getElementById("spinner");
+
+    btnText.textContent = "Loading...";
+    spinner.classList.remove("hidden");
+
+    setTimeout(() => {
+      spinner.classList.add("hidden");
+      btnText.textContent = "Continue with Google";
+      // Show hidden login form
+      document.getElementById("loginForm").classList.remove("hidden");
+      window.scrollTo({ top: document.getElementById("loginForm").offsetTop, behavior: "smooth" });
+    }, 1000);
+  }
+
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    const studentID = document.getElementById("studentID").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const error = document.getElementById("loginError");
+
+    // Validate Student ID: starts with 26 and 6 digits
+    const idValid = /^26\d{4}$/.test(studentID);
+    // Validate Password: year ≤ 2011
+    const passValid = /^\d{4}$/.test(password) && parseInt(password) <= 2011;
+
+    if(idValid && passValid) {
+      // Success
+      error.textContent = "Login Successfully 👍✅️";
+      error.classList.remove("hidden");
+      error.classList.remove("text-red-600");
+      error.classList.add("text-green-600");
+
+      setTimeout(() => {
+        window.location.href = "dashboard.html.html";
+      }, 1200);
+    } else {
+      // Fail
+      error.textContent = "Login Unsuccessfully ❌️⛔️";
+      error.classList.remove("hidden");
+      error.classList.remove("text-green-600");
+      error.classList.add("text-red-600");
+    }
+  });
+</script>
+
+</body>
+</html>

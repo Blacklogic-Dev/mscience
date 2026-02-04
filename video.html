@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Video Lessons - Master Science Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* Banner */
+    .top-banner {
+      height: 150px;
+      background: linear-gradient(to right, #0a1a33, #1e40af, #60a5fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Grade Tabs */
+    .grade-tab {
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+    .grade-tab.active {
+      background-color: #60a5fa;
+      color: #0a1a33;
+      font-weight: bold;
+    }
+
+    /* Video Card hover effect */
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-sky-400 via-blue-700 to-[#0a1a33] min-h-screen">
+
+  <div class="w-full max-w-6xl mx-auto p-4">
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+      Video Lessons - Master Science Hub
+    </div>
+
+    <!-- Grade Selector -->
+    <div class="flex justify-center gap-4 mb-6 flex-wrap">
+      <div class="grade-tab active" data-grade="9">Grade 9</div>
+      <div class="grade-tab" data-grade="10">Grade 10</div>
+      <div class="grade-tab" data-grade="11">Grade 11</div>
+      <div class="grade-tab" data-grade="12">Grade 12</div>
+    </div>
+
+    <!-- Subject Grid -->
+    <div id="subject-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Cards will be dynamically generated -->
+    </div>
+
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.grade-tab');
+    const grid = document.getElementById('subject-grid');
+
+    const data = {
+      9: [
+        {
+          title: 'Mathematics',
+          icon: 'fas fa-square-root-alt',
+          description: 'Learn Grade 9 maths step-by-step.',
+          video: 'https://www.youtube.com/embed/vFK3sjL7-f0?si=UXWeR93c4KKYh-kf',
+          link: 'https://share.google/BnMhk5oNJGpgROkBF'
+        },
+        {
+          title: 'Natural Sciences',
+          icon: 'fas fa-flask',
+          description: 'Physics, Chemistry, Biology lessons.',
+          video: 'https://www.youtube.com/embed/W2PzGCzo3IB1UsKWy',
+          link: 'https://share.google/W2PzGCzo3IB1UsKWy'
+        },
+        
+{
+  title: 'Technology',
+  icon: 'fas fa-laptop-code',
+  description: 'Learn practical tech skills.',
+  video: 'https://www.youtube.com/embed/videoseries?list=PLUQUc7GuVpb14Ys3k6u0V6gMIFyTIlF_L',
+  link: 'https://share.google/KbBmH6SOJiuoqOCor'
+}
+      ],
+      10: [
+        {
+          title: 'Mathematics',
+          icon: 'fas fa-square-root-alt',
+          description: 'Grade 10 maths step-by-step.',
+          video: '#',
+          link: 'https://share.google/tnVNidWZCarqJLbYz'
+        },
+        {
+          title: 'Physical Sciences',
+          icon: 'fas fa-atom',
+          description: 'Physics and Chemistry lessons.',
+          video: '#',
+          link: 'https://share.google/qiMKmpbimaiXNhZ2m'
+        },
+        {
+          title: 'Life Sciences',
+          icon: 'fas fa-dna',
+          description: 'Biology lessons for Grade 10.',
+          video: '#',
+          link: 'https://share.google/yLIUyF0QX8xi3oMDe'
+        }
+      ],
+      11: [
+        {
+          title: 'Mathematics',
+          icon: 'fas fa-square-root-alt',
+          description: 'Grade 11 maths videos.',
+          video: '#',
+          link: 'https://share.google/1x6K4Rmr7qylzRXen'
+        },
+        {
+          title: 'Physical Sciences',
+          icon: 'fas fa-atom',
+          description: 'Physics and Chemistry for Grade 11.',
+          video: '#',
+          link: 'https://share.google/qkzAXe1epGMKPaZSe'
+        },
+        {
+          title: 'Life Sciences',
+          icon: 'fas fa-dna',
+          description: 'Biology for Grade 11.',
+          video: '#',
+          link: 'https://share.google/OhDGe1p22fbtBJkbt'
+        }
+      ],
+      12: [
+        {
+          title: 'Mathematics',
+          icon: 'fas fa-square-root-alt',
+          description: 'Grade 12 maths videos.',
+          video: '#',
+          link: 'https://share.google/cCs9aqitkrVYwLQy1'
+        },
+        {
+          title: 'Physical Sciences',
+          icon: 'fas fa-atom',
+          description: 'Physics and Chemistry for Grade 12.',
+          video: '#',
+          link: 'https://share.google/Q0CuJPoVB6b0tTD8o'
+        },
+        {
+          title: 'Life Sciences',
+          icon: 'fas fa-dna',
+          description: 'Biology for Grade 12.',
+          video: '#',
+          link: 'https://share.google/lacNB16LPAEruhqd9'
+        }
+      ]
+    };
+
+    function renderGrade(grade) {
+      grid.innerHTML = '';
+      data[grade].forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'video-card bg-white/20 backdrop-blur-md rounded-2xl p-4 shadow-lg transition';
+        card.innerHTML = `
+          <div class="flex justify-center mb-3">
+            ${item.video !== '#' ? `<iframe class="rounded-xl w-full h-44" src="${item.video}" title="${item.title}" frameborder="0" allowfullscreen></iframe>` : ''}
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-1"><i class="${item.icon} mr-2"></i>${item.title}</h3>
+          <p class="text-white text-sm mb-2">${item.description}</p>
+          <a href="${item.link}" target="_blank" class="inline-block bg-white text-blue-700 font-semibold px-4 py-2 rounded-xl shadow-md hover:bg-blue-50 transition">Explore More</a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderGrade(tab.dataset.grade);
+      });
+    });
+
+    // Initial render
+    renderGrade(9);
+  </script>
+
+</body>
+</html>
